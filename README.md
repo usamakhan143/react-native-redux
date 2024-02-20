@@ -10,6 +10,7 @@ First, you need to install Redux and React-Redux in your project. You can do thi
 
 ```bash
 npm install redux react-redux
+npm install @reduxjs/toolkit
 # or
 yarn add redux react-redux
 ```
