@@ -1,3 +1,5 @@
+/* eslint-disable no-sequences */
+/* eslint-disable prettier/prettier */
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
@@ -6,113 +8,67 @@
  */
 
 import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import styles from './styles';
+import {ScrollView, Text, View} from 'react-native';
+import Product from './components/Product';
+import AppHeader from './components/AppHeader';
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
+function App(): JSX.Element {
+  const products = [
+    {
+      id: 1,
+      name: 'Laptop',
+      price: 999.99,
+      description: 'A powerful laptop for all your computing needs.',
+      category: 'Electronics',
+      imageUrl: 'https://example.com/laptop.jpg',
+    },
+    {
+      id: 2,
+      name: 'Smartphone',
+      price: 599.99,
+      description: 'Stay connected with this sleek and modern smartphone.',
+      category: 'Electronics',
+      imageUrl: 'https://example.com/smartphone.jpg',
+    },
+    {
+      id: 3,
+      name: 'Headphones',
+      price: 99.99,
+      description: 'High-quality headphones for immersive audio experience.',
+      category: 'Electronics',
+      imageUrl: 'https://example.com/headphones.jpg',
+    },
+    {
+      id: 4,
+      name: 'Running Shoes',
+      price: 79.99,
+      description: 'Comfortable and stylish shoes for your daily runs.',
+      category: 'Sports',
+      imageUrl: 'https://example.com/runningshoes.jpg',
+    },
+    {
+      id: 5,
+      name: 'Backpack',
+      price: 49.99,
+      description: 'A durable and spacious backpack for all your adventures.',
+      category: 'Travel',
+      imageUrl: 'https://example.com/backpack.jpg',
+    },
+  ];
 
-function Section({children, title}: SectionProps): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
   return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
+    <View style={{flex: 1}}>
+      <AppHeader />
+      <Text style={styles.title}>Redux Introduction</Text>
+      <ScrollView>
+        {products.map(item => {
+          return <Product key={item.id} name={item.name} price={item.price} />;
+        })}
+      </ScrollView>
     </View>
   );
 }
-
-function App(): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-}
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
 
 export default App;
