@@ -1,6 +1,6 @@
 /* eslint-disable no-unreachable */
 /* eslint-disable prettier/prettier */
-import { ADD_TO_CART } from "./constants";
+import { ADD_TO_CART, REMOVE_FROM_CART } from "./constants";
 
 const initialState = [];
 export const reducer = (state = initialState, action) => {
@@ -9,7 +9,15 @@ export const reducer = (state = initialState, action) => {
             return [
                 ...state,
                 action.payload
-            ]
+            ];
+
+        case REMOVE_FROM_CART:
+            let result = state.filter((element) => {
+                return element.name != action.payload
+            });
+            return [
+                ...result
+            ];
 
         default:
             return state
